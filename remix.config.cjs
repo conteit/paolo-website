@@ -1,7 +1,6 @@
 // remix.config.cjs
 /** @type {import('@remix-run/dev').AppConfig} */
-export default {
+module.exports = {
     serverBuildPath: "build/index.js",
     publicPath: "/build/",
 };
-
