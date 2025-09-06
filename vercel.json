@@ -2,11 +2,5 @@
   "buildCommand": "npm run build",
   "outputDirectory": "build",
   "installCommand": "npm install",
-  "framework": "remix",
-  "builds": [
-    {
-      "src": "remix.config.cjs",
-      "use": "@vercel/remix"
-    }
-  ]
+  "framework": "remix"
 }
