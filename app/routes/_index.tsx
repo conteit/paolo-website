@@ -14,7 +14,7 @@ export default function Index() {
   return (
     <>
       <h1 className="text-9xl text-center m-10">Hi! I'm Paolo.</h1>
-      <p className="text-center text-2xl">Site undercontruction</p>
+      <p className="text-center text-2xl">Site under construction</p>
     </>
   );
 }
