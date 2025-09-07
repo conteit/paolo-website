@@ -3,7 +3,7 @@ import type { MetaFunction } from "@vercel/remix";
 export const config = { runtime: "edge" };
 
 export const meta: MetaFunction = () => [
-  { title: "Remix@Edge | New Remix App" },
+  { title: "This is Paolo Contessi" },
 ];
 
 export default function Edge() {
