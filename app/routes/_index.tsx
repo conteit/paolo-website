@@ -16,7 +16,7 @@ export default function Index() {
     <>
       <h1 className="text-9xl text-center m-10">Hi! I'm Paolo.</h1>
       <p className="text-center text-2xl text-gray-500 dark:text-gray-400">
-        Site under construction
+        Site is still under construction
       </p>
       <ConstructionAnimation />
     </>
