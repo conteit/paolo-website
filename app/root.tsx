@@ -1,25 +1,33 @@
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
-import type { LinksFunction } from '@remix-run/node';
-import './globals.css';
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "@remix-run/react";
+import { Analytics } from "@vercel/analytics/react";
+import "./app.css";
 
-export const links: LinksFunction = () => [];
-
-export default function App() {
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en">
       <head>
-        <title>Paolo Contessi</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>This is Paolo Contessi</title>
         <Meta />
         <Links />
       </head>
-      <body className="h-full font-sans antialiased bg-background text-foreground">
-        <Outlet />
+      <body>
+        {children}
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
+        <Analytics />
       </body>
     </html>
   );
+}
+
+export default function App() {
+  return <Outlet />;
 }

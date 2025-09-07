@@ -1,23 +1,16 @@
-import { vitePlugin as remix } from '@remix-run/dev';
-import { defineConfig } from 'vite';
-import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
+import { vitePlugin as remix } from "@remix-run/dev";
+import { installGlobals } from "@remix-run/node";
+import { defineConfig } from "vite";
+import { vercelPreset } from "@vercel/remix/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
+import tailwindcss from "@tailwindcss/vite";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+installGlobals();
 
 export default defineConfig({
   plugins: [
-    remix({
-      future: {
-        v3_fetcherPersist: true,
-        v3_relativeSplatPath: true,
-        v3_throwAbortReason: true,
-      },
-    }),
+    tailwindcss(),
+    remix({ presets: [vercelPreset()] }),
+    tsconfigPaths(),
   ],
-  resolve: {
-    alias: {
-      '~': resolve(__dirname, './app'),
-    },
-  },
 });

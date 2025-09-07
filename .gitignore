@@ -1,7 +1,7 @@
-/public/build/
-/build/
-/node_modules/
-/.cache/
-/.idea/
+node_modules
 
+/build
+.env
 .vercel
+.idea/
+.cache/
