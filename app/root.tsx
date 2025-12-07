@@ -13,7 +13,7 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-export function Layout({ children }: LayoutProps): JSX.Element {
+export function Layout({ children }: LayoutProps): React.ReactNode {
   return (
     <html lang="en">
       <head>
@@ -34,6 +34,6 @@ export function Layout({ children }: LayoutProps): JSX.Element {
   );
 }
 
-export default function App(): JSX.Element {
+export default function App(): React.ReactNode {
   return <Outlet />;
 }
