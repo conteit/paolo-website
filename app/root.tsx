@@ -4,11 +4,16 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
+} from "react-router";
 import { Analytics } from "@vercel/analytics/react";
+
 import "./app.css";
 
-export function Layout({ children }: { children: React.ReactNode }) {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export function Layout({ children }: LayoutProps): JSX.Element {
   return (
     <html lang="en">
       <head>
@@ -29,6 +34,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
+export default function App(): JSX.Element {
   return <Outlet />;
 }
