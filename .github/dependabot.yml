@@ -12,7 +12,8 @@ updates:
     labels:
       - "dependencies"
     ignore:
+      # Block React versions vulnerable to React2Shell (CVE-2025-55182)
       - dependency-name: "react"
-        update-types: ["version-update:semver-major"]
+        versions: ["19.0.0", "19.1.0", "19.1.1", "19.2.0"]
       - dependency-name: "react-dom"
-        update-types: ["version-update:semver-major"]
+        versions: ["19.0.0", "19.1.0", "19.1.1", "19.2.0"]

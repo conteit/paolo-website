@@ -12,7 +12,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index(): JSX.Element {
+export default function Index(): React.ReactNode {
   return (
     <>
       <h1 className="text-9xl text-center m-10">Hi! I'm Paolo.</h1>
