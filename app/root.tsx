@@ -4,7 +4,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
+} from "react-router";
 import { Analytics } from "@vercel/analytics/react";
 
 import "./app.css";

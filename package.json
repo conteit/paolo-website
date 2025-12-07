@@ -5,44 +5,42 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix vite:build",
-    "dev": "remix vite:dev",
-    "typecheck": "tsc",
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "typecheck": "react-router typegen && tsc",
     "format": "prettier --write .",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "lint:fix": "npm run lint -- --fix"
+    "start": "react-router-serve ./build/server/index.js"
   },
   "dependencies": {
-    "@remix-run/node": "2.10.0",
-    "@remix-run/react": "2.10.0",
-    "@remix-run/server-runtime": "2.10.0",
-    "@tailwindcss/postcss": "^4.1.13",
-    "@tailwindcss/vite": "^4.1.13",
-    "@vercel/analytics": "^1.2.2",
-    "@vercel/remix": "2.10.0",
+    "@react-router/fs-routes": "^7.10.1",
+    "@react-router/node": "^7.10.1",
+    "@react-router/serve": "^7.10.1",
+    "@tailwindcss/postcss": "^4.1.17",
+    "@tailwindcss/vite": "^4.1.17",
+    "@vercel/analytics": "^1.6.1",
+    "@vercel/react-router": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "isbot": "^5",
-    "lucide-react": "^0.542.0",
-    "prettier": "^3.6.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwind-merge": "^3.3.1"
+    "isbot": "^5.1.32",
+    "lucide-react": "^0.556.0",
+    "prettier": "^3.7.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router": "^7.10.1",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "2.10.0",
-    "@remix-run/eslint-config": "2.10.0",
-    "@types/react": "^18.2.20",
-    "@types/react-dom": "^18.2.7",
-    "autoprefixer": "^10.4.21",
-    "eslint": "^8.38.0",
-    "tailwindcss": "^4.1.13",
-    "tw-animate-css": "^1.3.8",
-    "typescript": "^5.1.6",
-    "vite": "^5.1.0",
-    "vite-tsconfig-paths": "^4.2.1"
+    "@react-router/dev": "^7.10.1",
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7",
+    "autoprefixer": "^10.4.22",
+    "tailwindcss": "^4.1.17",
+    "tw-animate-css": "^1.4.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.6",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   }
 }
