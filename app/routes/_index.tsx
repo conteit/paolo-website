@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@vercel/remix";
-import ConstructionAnimation from "~/lib/ConstructionAnimation";
+
+import { ConstructionAnimation } from "~/lib/ConstructionAnimation";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,7 +12,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
+export default function Index(): JSX.Element {
   return (
     <>
       <h1 className="text-9xl text-center m-10">Hi! I'm Paolo.</h1>

@@ -8,7 +8,9 @@
     "build": "remix vite:build",
     "dev": "remix vite:dev",
     "typecheck": "tsc",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "@remix-run/node": "2.10.0",
