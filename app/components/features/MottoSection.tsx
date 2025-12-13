@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
+const BG_IMAGE =
+  "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop";
+
 export function MottoSection(): React.ReactNode {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -25,10 +28,14 @@ export function MottoSection(): React.ReactNode {
     <section
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{
+        backgroundImage: `url(${BG_IMAGE})`,
+        backgroundAttachment: "fixed",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        boxShadow: "inset 0 0 100px rgba(0,0,0,0.3)",
+      }}
     >
-      {/* Full gradient background */}
-      <div className="absolute inset-0 gradient-bg" aria-hidden="true" />
-
       {/* Glass morphism card with motto */}
       <div
         className={`relative z-10 max-w-4xl mx-4 px-8 py-12 md:px-16 md:py-20 rounded-3xl glass transition-all duration-1000 ${
@@ -36,8 +43,8 @@ export function MottoSection(): React.ReactNode {
         }`}
       >
         <blockquote className="text-center">
-          <p className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light italic leading-relaxed text-black dark:text-white">
-            "Crafting software systems to let people focus on what matters"
+          <p className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light italic leading-relaxed text-white">
+            "Crafting software systems<br/>to let people focus<br/>on what matters"
           </p>
         </blockquote>
       </div>
