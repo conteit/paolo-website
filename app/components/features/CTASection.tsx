@@ -11,12 +11,12 @@ const socialLinks: SocialLink[] = [
   {
     icon: <Github className="w-5 h-5" />,
     label: "GitHub",
-    href: "https://github.com/paolocontessi",
+    href: "https://github.com/conteit",
   },
   {
     icon: <Linkedin className="w-5 h-5" />,
     label: "LinkedIn",
-    href: "https://linkedin.com/in/paolocontessi",
+    href: "https://www.linkedin.com/in/paolo-contessi-64536657/",
   },
 ];
 
