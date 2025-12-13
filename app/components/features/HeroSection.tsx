@@ -1,7 +1,6 @@
 import { ChevronDown } from "lucide-react";
 
-const BG_IMAGE =
-  "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop";
+const BG_IMAGE = "/images/hero-bg.jpg";
 
 export function HeroSection(): React.ReactNode {
   return (
