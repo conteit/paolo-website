@@ -7,7 +7,7 @@ import { CTASection } from "~/components/features/CTASection";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Paolo Contessi - Software Engineer" },
+    { title: "Paolo Contessi - Senior Principal Software Engineer" },
     {
       name: "description",
       content:

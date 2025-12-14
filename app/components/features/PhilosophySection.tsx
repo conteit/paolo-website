@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Sparkles, Zap, Wrench, Users } from "lucide-react";
+import { Gem, Shapes, Sparkles, Users } from "lucide-react";
 
 interface PhilosophyItem {
   icon: React.ReactNode;
@@ -15,20 +15,26 @@ const philosophyItems: PhilosophyItem[] = [
       "Elegant solutions that cut through complexity. Less is more when every line of code serves a purpose.",
   },
   {
-    icon: <Zap className="w-8 h-8" />,
-    title: "Performance",
+    // If you meant TEAMWORK:
+    icon: <Users className="w-8 h-8" />, // Changed icon to Users
+    title: "Collective Genius",
     description:
-      "Speed isn't a feature, it's a foundation. Systems that respond instantly create seamless experiences.",
+      "Great software is a team sport. I prioritize clear communication and shared ownership over solo heroics.",
+
+    // OR, if you meant PERFORMANCE (based on your previous description):
+    // icon: <Zap className="w-8 h-8" />,
+    // title: "Uncompromising Speed",
+    // description: "Performance isn't a feature, it's a foundation. Instant interactions build trust; latency breaks it."
   },
   {
-    icon: <Wrench className="w-8 h-8" />,
-    title: "Craftsmanship",
+    icon: <Shapes className="w-8 h-8" />,
+    title: "Strategic Adaptability",
     description:
-      "Quality over quantity, always. Code is a craft that deserves attention to detail and pride in execution.",
+      "I focus on finding the right fit to bring value, blending new innovations with established tech.",
   },
   {
-    icon: <Users className="w-8 h-8" />,
-    title: "Human-Centered",
+    icon: <Gem className="w-8 h-8" />, // Suggesting Heart or User icon
+    title: "Human-First",
     description:
       "Technology exists to serve people. Every system should amplify human capability, not complicate it.",
   },
@@ -45,7 +51,7 @@ export function PhilosophySection(): React.ReactNode {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     if (sectionRef.current) {

@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { useBackground } from "~/hooks/useBackground";
 
-const BG_IMAGE = "/images/hero-bg.jpg";
 // Replace with your actual photo path
 const PHOTO_IMAGE = "/images/paolo-photo.jpg";
 
 export function MottoSection(): React.ReactNode {
+  const bgImage = useBackground();
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -30,7 +31,7 @@ export function MottoSection(): React.ReactNode {
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
-        backgroundImage: `url(${BG_IMAGE})`,
+        backgroundImage: `url(${bgImage})`,
         backgroundAttachment: "fixed",
         backgroundPosition: "center",
         backgroundSize: "cover",

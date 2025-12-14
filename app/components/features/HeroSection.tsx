@@ -1,8 +1,9 @@
 import { ChevronDown } from "lucide-react";
-
-const BG_IMAGE = "/images/hero-bg.jpg";
+import { useBackground } from "~/hooks/useBackground";
 
 export function HeroSection(): React.ReactNode {
+  const bgImage = useBackground();
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-black">
       {/* Content container */}
@@ -13,7 +14,7 @@ export function HeroSection(): React.ReactNode {
         <h1
           className="text-[7rem] md:text-[10rem] lg:text-[14rem] xl:text-[18rem] font-black leading-none tracking-tighter select-none fade-in fade-in-delay-1 px-4"
           style={{
-            backgroundImage: `url(${BG_IMAGE})`,
+            backgroundImage: `url(${bgImage})`,
             backgroundAttachment: "fixed",
             backgroundPosition: "center",
             backgroundSize: "cover",
