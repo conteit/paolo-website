@@ -4,7 +4,7 @@ const STORAGE_KEY = "paolo-site-bg";
 const EXPIRY_HOURS = 8;
 
 // Update this number when you add more backgrounds
-const TOTAL_BACKGROUNDS = 6;
+const TOTAL_BACKGROUNDS = 1;
 
 interface StoredBackground {
   index: number;
