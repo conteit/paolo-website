@@ -11,6 +11,7 @@ export async function action({ request }: ActionFunctionArgs) {
   try {
     const formData = await request.formData();
     const message = formData.get("message");
+    const email = formData.get("email");
 
     if (!message || typeof message !== "string" || message.trim().length === 0) {
       return Response.json({ error: "Message is required" }, { status: 400 });
@@ -23,6 +24,16 @@ export async function action({ request }: ActionFunctionArgs) {
       );
     }
 
+    // Validate email if provided
+    let replyToEmail: string | undefined;
+    if (email && typeof email === "string" && email.trim().length > 0) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email.trim())) {
+        return Response.json({ error: "Invalid email address" }, { status: 400 });
+      }
+      replyToEmail = email.trim();
+    }
+
     const recipientEmail = process.env.CONTACT_EMAIL;
     if (!recipientEmail) {
       console.error("CONTACT_EMAIL environment variable not set");
@@ -32,12 +43,18 @@ export async function action({ request }: ActionFunctionArgs) {
       );
     }
 
+    const emailBody = replyToEmail
+      ? `You received a new message from your website contact form:\n\nFrom: ${replyToEmail}\n\n${message.trim()}`
+      : `You received a new message from your website contact form:\n\n${message.trim()}`;
+
     const { error } = await resend.emails.send({
       from: "Contact Form <hello@paolocontessi.me>",
       to: recipientEmail,
-      subject: "New message from paolocontessi.me",
-      text: `You received a new message from your website contact form:\n\n${message.trim()}`,
-      replyTo: undefined,
+      subject: replyToEmail
+        ? `New message from ${replyToEmail}`
+        : "New message from paolocontessi.me",
+      text: emailBody,
+      replyTo: replyToEmail,
     });
 
     if (error) {

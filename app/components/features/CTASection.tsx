@@ -39,6 +39,7 @@ export function CTASection(): React.ReactNode {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [errorDismissed, setErrorDismissed] = useState(false);
@@ -75,6 +76,7 @@ export function CTASection(): React.ReactNode {
   useEffect(() => {
     if (isSuccess) {
       setShowSuccess(true);
+      setEmail("");
       setMessage("");
       const timer = setTimeout(() => {
         setShowSuccess(false);
@@ -117,9 +119,13 @@ export function CTASection(): React.ReactNode {
       if (message.trim().length === 0 || isSubmitting) return;
 
       setErrorDismissed(false);
-      fetcher.submit({ message: message.trim() }, { method: "POST", action: "/api/contact" });
+      const formData: Record<string, string> = { message: message.trim() };
+      if (email.trim()) {
+        formData.email = email.trim();
+      }
+      fetcher.submit(formData, { method: "POST", action: "/api/contact" });
     },
-    [message, isSubmitting, fetcher]
+    [email, message, isSubmitting, fetcher]
   );
 
   return (
@@ -186,7 +192,7 @@ export function CTASection(): React.ReactNode {
         {/* Inline Contact Form */}
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            showContactForm ? "max-h-80 opacity-100 mb-6" : "max-h-0 opacity-0"
+            showContactForm ? "max-h-96 opacity-100 mb-6" : "max-h-0 opacity-0"
           }`}
         >
           <div
@@ -207,6 +213,14 @@ export function CTASection(): React.ReactNode {
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your email (optional, for reply)"
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 mb-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                />
                 <div className="relative">
                   <textarea
                     ref={textareaRef}
