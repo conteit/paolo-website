@@ -41,10 +41,11 @@ export function CTASection(): React.ReactNode {
   const [showContactForm, setShowContactForm] = useState(false);
   const [message, setMessage] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [errorDismissed, setErrorDismissed] = useState(false);
 
   const isSubmitting = fetcher.state === "submitting";
   const isSuccess = fetcher.data?.success === true;
-  const error = fetcher.data?.error;
+  const error = errorDismissed ? undefined : fetcher.data?.error;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -98,7 +99,13 @@ export function CTASection(): React.ReactNode {
   );
 
   const handleToggleContact = useCallback(() => {
-    setShowContactForm((prev) => !prev);
+    setShowContactForm((prev) => {
+      // When closing, dismiss any error
+      if (prev) {
+        setErrorDismissed(true);
+      }
+      return !prev;
+    });
     if (showSuccess) {
       setShowSuccess(false);
     }
@@ -109,6 +116,7 @@ export function CTASection(): React.ReactNode {
       e.preventDefault();
       if (message.trim().length === 0 || isSubmitting) return;
 
+      setErrorDismissed(false);
       fetcher.submit({ message: message.trim() }, { method: "POST", action: "/api/contact" });
     },
     [message, isSubmitting, fetcher]

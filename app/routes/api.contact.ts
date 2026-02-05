@@ -3,10 +3,6 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-interface ContactFormData {
-  message: string;
-}
-
 export async function action({ request }: ActionFunctionArgs) {
   if (request.method !== "POST") {
     return Response.json({ error: "Method not allowed" }, { status: 405 });
@@ -37,9 +33,9 @@ export async function action({ request }: ActionFunctionArgs) {
     }
 
     const { error } = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>",
+      from: "Contact Form <hello@paolocontessi.me>",
       to: recipientEmail,
-      subject: "New message from paolocontessi.com",
+      subject: "New message from paolocontessi.me",
       text: `You received a new message from your website contact form:\n\n${message.trim()}`,
       replyTo: undefined,
     });
