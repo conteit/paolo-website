@@ -1,4 +1,5 @@
 import type { MetaFunction } from "react-router";
+import { Link } from "react-router";
 
 import { HeroSection } from "~/components/features/HeroSection";
 import { MottoSection } from "~/components/features/MottoSection";
@@ -19,6 +20,8 @@ export const meta: MetaFunction = () => {
 export default function Index(): React.ReactNode {
   return (
     <div className="page-content">
+      {/* Prefetch projects page for smoother transition */}
+      <Link to="/projects" prefetch="render" className="hidden" aria-hidden="true" tabIndex={-1} />
       <main>
         <HeroSection />
         <MottoSection />
