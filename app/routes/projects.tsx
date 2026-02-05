@@ -1,6 +1,6 @@
 import type { MetaFunction } from "react-router";
 import { Link, useNavigate } from "react-router";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { ArrowLeft } from "lucide-react";
 
 import { ProjectCard, type Project } from "~/components/features/ProjectCard";
@@ -74,7 +74,6 @@ const projects: Project[] = [
 export default function Projects(): React.ReactNode {
   const bgImage = useBackground();
   const navigate = useNavigate();
-  const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -106,7 +105,11 @@ export default function Projects(): React.ReactNode {
 
   return (
     <div className="page-content">
-      <main className="min-h-screen bg-white dark:bg-black">
+      <main
+        className={`min-h-screen bg-white dark:bg-black transition-opacity duration-500 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
         {/* Brand header - reminder this is Paolo's site */}
         <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-black/80 border-b border-gray-200 dark:border-gray-800">
           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -138,22 +141,10 @@ export default function Projects(): React.ReactNode {
         {/* Hero section */}
         <section className="py-16 md:py-24 px-6">
           <div className="max-w-6xl mx-auto text-center">
-            <h1
-              className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-black dark:text-white transition-all duration-700 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-            >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-black dark:text-white">
               Projects
             </h1>
-            <p
-              className={`text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-            >
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               A collection of projects, experiments, and things I've built over
               the years.
             </p>
@@ -161,16 +152,11 @@ export default function Projects(): React.ReactNode {
         </section>
 
         {/* Projects Grid */}
-        <section ref={sectionRef} className="pb-24 px-6">
+        <section className="pb-24 px-6">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-              {projects.map((project, index) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  index={index}
-                  isVisible={isVisible}
-                />
+              {projects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
               ))}
             </div>
           </div>

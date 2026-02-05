@@ -11,24 +11,11 @@ export interface Project {
 
 interface ProjectCardProps {
   project: Project;
-  index: number;
-  isVisible: boolean;
 }
 
-export function ProjectCard({
-  project,
-  index,
-  isVisible,
-}: ProjectCardProps): React.ReactNode {
+export function ProjectCard({ project }: ProjectCardProps): React.ReactNode {
   return (
-    <article
-      className={`project-card p-8 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800 hover:border-purple-500/50 dark:hover:border-purple-500/50 transition-all duration-700 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
-      style={{
-        transitionDelay: isVisible ? `${index * 100}ms` : "0ms",
-      }}
-    >
+    <article className="project-card p-8 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800 hover:border-purple-500/50 dark:hover:border-purple-500/50">
       <div className="flex flex-col h-full">
         {/* Icon and Title */}
         <div className="flex items-start gap-4 mb-4">
