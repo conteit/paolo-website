@@ -3,6 +3,39 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+interface TurnstileVerifyResponse {
+  success: boolean;
+  "error-codes"?: string[];
+}
+
+async function verifyTurnstileToken(token: string): Promise<boolean> {
+  const secretKey = process.env.TURNSTILE_SECRET_KEY;
+  if (!secretKey) {
+    console.error("TURNSTILE_SECRET_KEY environment variable not set");
+    return false;
+  }
+
+  try {
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: secretKey,
+          response: token,
+        }),
+      }
+    );
+
+    const data = (await response.json()) as TurnstileVerifyResponse;
+    return data.success;
+  } catch (error) {
+    console.error("Turnstile verification error:", error);
+    return false;
+  }
+}
+
 export async function action({ request }: ActionFunctionArgs) {
   if (request.method !== "POST") {
     return Response.json({ error: "Method not allowed" }, { status: 405 });
@@ -12,6 +45,25 @@ export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
     const message = formData.get("message");
     const email = formData.get("email");
+    const turnstileToken = formData.get("turnstileToken");
+
+    // Verify Turnstile token if secret key is configured
+    if (process.env.TURNSTILE_SECRET_KEY) {
+      if (!turnstileToken || typeof turnstileToken !== "string") {
+        return Response.json(
+          { error: "Security verification required" },
+          { status: 400 }
+        );
+      }
+
+      const isValidToken = await verifyTurnstileToken(turnstileToken);
+      if (!isValidToken) {
+        return Response.json(
+          { error: "Security verification failed. Please try again." },
+          { status: 400 }
+        );
+      }
+    }
 
     if (!message || typeof message !== "string" || message.trim().length === 0) {
       return Response.json({ error: "Message is required" }, { status: 400 });

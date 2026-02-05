@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useNavigate, useFetcher } from "react-router";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import {
   ArrowRight,
   Mail,
@@ -10,6 +11,8 @@ import {
   Check,
   Loader2,
 } from "lucide-react";
+
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
 
 interface SocialLink {
   icon: React.ReactNode;
@@ -37,12 +40,14 @@ export function CTASection(): React.ReactNode {
   const fetcher = useFetcher();
   const sectionRef = useRef<HTMLElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [errorDismissed, setErrorDismissed] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const isSubmitting = fetcher.state === "submitting";
   const isSuccess = fetcher.data?.success === true;
@@ -78,6 +83,8 @@ export function CTASection(): React.ReactNode {
       setShowSuccess(true);
       setEmail("");
       setMessage("");
+      setTurnstileToken(null);
+      turnstileRef.current?.reset();
       const timer = setTimeout(() => {
         setShowSuccess(false);
         setShowContactForm(false);
@@ -117,15 +124,19 @@ export function CTASection(): React.ReactNode {
     (e: React.FormEvent) => {
       e.preventDefault();
       if (message.trim().length === 0 || isSubmitting) return;
+      if (!turnstileToken) return;
 
       setErrorDismissed(false);
-      const formData: Record<string, string> = { message: message.trim() };
+      const formData: Record<string, string> = {
+        message: message.trim(),
+        turnstileToken,
+      };
       if (email.trim()) {
         formData.email = email.trim();
       }
       fetcher.submit(formData, { method: "POST", action: "/api/contact" });
     },
-    [email, message, isSubmitting, fetcher]
+    [email, message, isSubmitting, fetcher, turnstileToken]
   );
 
   return (
@@ -192,7 +203,7 @@ export function CTASection(): React.ReactNode {
         {/* Inline Contact Form */}
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            showContactForm ? "max-h-96 opacity-100 mb-6" : "max-h-0 opacity-0"
+            showContactForm ? "max-h-[500px] opacity-100 mb-6" : "max-h-0 opacity-0"
           }`}
         >
           <div
@@ -243,9 +254,29 @@ export function CTASection(): React.ReactNode {
                   </p>
                 )}
 
+                {TURNSTILE_SITE_KEY && (
+                  <div className="mt-4 flex justify-center">
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey={TURNSTILE_SITE_KEY}
+                      onSuccess={setTurnstileToken}
+                      onError={() => setTurnstileToken(null)}
+                      onExpire={() => setTurnstileToken(null)}
+                      options={{
+                        theme: "auto",
+                        size: "normal",
+                      }}
+                    />
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  disabled={message.trim().length === 0 || isSubmitting}
+                  disabled={
+                    message.trim().length === 0 ||
+                    isSubmitting ||
+                    (TURNSTILE_SITE_KEY && !turnstileToken)
+                  }
                   className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 disabled:cursor-not-allowed text-white font-medium transition-colors"
                 >
                   {isSubmitting ? (
