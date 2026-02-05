@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { useNavigate } from "react-router";
 import { ArrowRight, Mail, Github, Linkedin } from "lucide-react";
 
 interface SocialLink {
@@ -21,6 +22,7 @@ const socialLinks: SocialLink[] = [
 ];
 
 export function CTASection(): React.ReactNode {
+  const navigate = useNavigate();
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -40,6 +42,20 @@ export function CTASection(): React.ReactNode {
 
     return () => observer.disconnect();
   }, []);
+
+  const handleViewProjects = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      if (document.startViewTransition) {
+        document.startViewTransition(() => {
+          navigate("/projects");
+        });
+      } else {
+        navigate("/projects");
+      }
+    },
+    [navigate]
+  );
 
   return (
     <section
@@ -73,13 +89,13 @@ export function CTASection(): React.ReactNode {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <a
-            href="/projects"
+          <button
+            onClick={handleViewProjects}
             className="cta-button inline-flex items-center gap-2 px-8 py-4 rounded-full bg-purple-600 hover:bg-purple-700 text-white font-medium text-lg shadow-lg shadow-purple-500/25"
           >
             View Projects
             <ArrowRight className="w-5 h-5" />
-          </a>
+          </button>
           <a
             href="mailto:hello@paolocontessi.com"
             className="cta-button inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white font-medium text-lg border border-gray-200 dark:border-gray-700"

@@ -18,11 +18,13 @@ export const meta: MetaFunction = () => {
 
 export default function Index(): React.ReactNode {
   return (
-    <main>
-      <HeroSection />
-      <MottoSection />
-      <PhilosophySection />
-      <CTASection />
-    </main>
+    <div className="page-content">
+      <main>
+        <HeroSection />
+        <MottoSection />
+        <PhilosophySection />
+        <CTASection />
+      </main>
+    </div>
   );
 }
