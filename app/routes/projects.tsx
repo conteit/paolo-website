@@ -78,8 +78,8 @@ export default function Projects(): React.ReactNode {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Trigger animation after mount
-    const timer = setTimeout(() => setIsVisible(true), 100);
+    // Wait for view transition to complete (300ms) before fading in content
+    const timer = setTimeout(() => setIsVisible(true), 350);
     return () => clearTimeout(timer);
   }, []);
 
