@@ -43,7 +43,7 @@ export function MottoSection(): React.ReactNode {
       <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-8 md:gap-16">
         {/* Photo with fade effect */}
         <div
-          className={`relative flex-shrink-0 transition-all duration-1000 ${
+          className={`relative shrink-0 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
           }`}
         >
