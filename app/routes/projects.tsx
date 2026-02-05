@@ -120,20 +120,24 @@ export default function Projects(): React.ReactNode {
               <ArrowLeft className="w-4 h-4" />
               Back
             </button>
-            <Link
-              to="/"
-              className="text-lg font-bold"
-              style={{
-                backgroundImage: `url(${bgImage})`,
-                backgroundAttachment: "fixed",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              Paolo
+            <Link to="/" className="text-lg">
+              <span className="font-light text-black dark:text-white">
+                Hi! I'm{" "}
+              </span>
+              <span
+                className="font-bold"
+                style={{
+                  backgroundImage: `url(${bgImage})`,
+                  backgroundAttachment: "fixed",
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                }}
+              >
+                Paolo
+              </span>
             </Link>
           </div>
         </header>
