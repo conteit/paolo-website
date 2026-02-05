@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { useNavigate } from "react-router";
-import { ArrowRight, Mail, Github, Linkedin } from "lucide-react";
+import { useNavigate, useFetcher } from "react-router";
+import {
+  ArrowRight,
+  Mail,
+  Github,
+  Linkedin,
+  Send,
+  X,
+  Check,
+  Loader2,
+} from "lucide-react";
 
 interface SocialLink {
   icon: React.ReactNode;
@@ -21,10 +30,21 @@ const socialLinks: SocialLink[] = [
   },
 ];
 
+const MAX_MESSAGE_LENGTH = 1000;
+
 export function CTASection(): React.ReactNode {
   const navigate = useNavigate();
+  const fetcher = useFetcher();
   const sectionRef = useRef<HTMLElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
+  const [message, setMessage] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const isSubmitting = fetcher.state === "submitting";
+  const isSuccess = fetcher.data?.success === true;
+  const error = fetcher.data?.error;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,6 +63,26 @@ export function CTASection(): React.ReactNode {
     return () => observer.disconnect();
   }, []);
 
+  // Focus textarea when form opens
+  useEffect(() => {
+    if (showContactForm && textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  }, [showContactForm]);
+
+  // Handle success state
+  useEffect(() => {
+    if (isSuccess) {
+      setShowSuccess(true);
+      setMessage("");
+      const timer = setTimeout(() => {
+        setShowSuccess(false);
+        setShowContactForm(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess]);
+
   const handleViewProjects = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
@@ -55,6 +95,23 @@ export function CTASection(): React.ReactNode {
       }
     },
     [navigate]
+  );
+
+  const handleToggleContact = useCallback(() => {
+    setShowContactForm((prev) => !prev);
+    if (showSuccess) {
+      setShowSuccess(false);
+    }
+  }, [showSuccess]);
+
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (message.trim().length === 0 || isSubmitting) return;
+
+      fetcher.submit({ message: message.trim() }, { method: "POST", action: "/api/contact" });
+    },
+    [message, isSubmitting, fetcher]
   );
 
   return (
@@ -85,7 +142,7 @@ export function CTASection(): React.ReactNode {
 
         {/* Primary CTAs */}
         <div
-          className={`flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 transition-all duration-700 delay-100 ${
+          className={`flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 transition-all duration-700 delay-100 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
@@ -96,13 +153,94 @@ export function CTASection(): React.ReactNode {
             View Projects
             <ArrowRight className="w-5 h-5" />
           </button>
-          <a
-            href="mailto:hello@paolocontessi.com"
-            className="cta-button inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white font-medium text-lg border border-gray-200 dark:border-gray-700"
+          <button
+            onClick={handleToggleContact}
+            className={`cta-button inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium text-lg border transition-colors ${
+              showContactForm
+                ? "bg-purple-600 hover:bg-purple-700 text-white border-purple-600 shadow-lg shadow-purple-500/25"
+                : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white border-gray-200 dark:border-gray-700"
+            }`}
           >
-            <Mail className="w-5 h-5" />
-            Get in Touch
-          </a>
+            {showContactForm ? (
+              <>
+                <X className="w-5 h-5" />
+                Close
+              </>
+            ) : (
+              <>
+                <Mail className="w-5 h-5" />
+                Get in Touch
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Inline Contact Form */}
+        <div
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            showContactForm ? "max-h-80 opacity-100 mb-6" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div
+            className={`max-w-lg mx-auto p-6 rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800 transition-all duration-700 delay-100 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
+            }`}
+          >
+            {showSuccess ? (
+              <div className="flex flex-col items-center gap-3 py-4">
+                <div className="p-3 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+                  <Check className="w-6 h-6" />
+                </div>
+                <p className="text-green-600 dark:text-green-400 font-medium">
+                  Message sent! I'll get back to you soon.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <div className="relative">
+                  <textarea
+                    ref={textareaRef}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Write a short message..."
+                    maxLength={MAX_MESSAGE_LENGTH}
+                    rows={3}
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                  />
+                  <div className="absolute bottom-3 right-3 text-xs text-gray-400">
+                    {message.length}/{MAX_MESSAGE_LENGTH}
+                  </div>
+                </div>
+
+                {error && (
+                  <p className="mt-2 text-sm text-red-500 dark:text-red-400">
+                    {error}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={message.trim().length === 0 || isSubmitting}
+                  className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 disabled:cursor-not-allowed text-white font-medium transition-colors"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Send Message
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
         </div>
 
         {/* Social links */}
