@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useBackground } from "~/hooks/useBackground";
 
-// Replace with your actual photo path
-const PHOTO_IMAGE = "/images/paolo-photo.jpg";
+const PHOTO_IMAGE = "/images/avatar.jpeg";
 
 export function MottoSection(): React.ReactNode {
   const bgImage = useBackground();
