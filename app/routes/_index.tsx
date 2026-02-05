@@ -1,25 +1,30 @@
 import type { MetaFunction } from "react-router";
 
-import { ConstructionAnimation } from "~/lib/ConstructionAnimation";
+import { HeroSection } from "~/components/features/HeroSection";
+import { MottoSection } from "~/components/features/MottoSection";
+import { PhilosophySection } from "~/components/features/PhilosophySection";
+import { CTASection } from "~/components/features/CTASection";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "This is Paolo Contessi" },
+    { title: "Paolo Contessi - Senior Principal Software Engineer" },
     {
       name: "description",
-      content: "Paolo's Profile page: this is my playground",
+      content:
+        "Crafting software systems to let people focus on what matters. Personal portfolio of Paolo Contessi.",
     },
   ];
 };
 
 export default function Index(): React.ReactNode {
   return (
-    <>
-      <h1 className="text-9xl text-center m-10">Hi! I'm Paolo.</h1>
-      <p className="text-center text-2xl text-gray-500 dark:text-gray-400">
-        Site is still under construction
-      </p>
-      <ConstructionAnimation />
-    </>
+    <div className="page-content">
+      <main>
+        <HeroSection />
+        <MottoSection />
+        <PhilosophySection />
+        <CTASection />
+      </main>
+    </div>
   );
 }

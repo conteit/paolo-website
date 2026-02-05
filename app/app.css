@@ -116,3 +116,258 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Abstract colorful background - Apple gift card style */
+.abstract-bg {
+  background:
+    /* Flowing color blobs */
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(124, 49, 208, 0.9) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 80% at 80% 20%, rgba(59, 130, 246, 0.85) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 60% at 70% 80%, rgba(236, 72, 153, 0.9) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 70% at 30% 90%, rgba(6, 182, 212, 0.85) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 60% at 50% 50%, rgba(168, 85, 247, 0.7) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 60%, rgba(249, 115, 22, 0.8) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 10% 20%, rgba(34, 197, 94, 0.7) 0%, transparent 50%),
+    /* Base dark color */
+    linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+}
+
+/* Carved text effect - shows colorful background through text with inner shadow */
+.carved-name {
+  /* Show the abstract background through the text */
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(124, 49, 208, 0.9) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 80% at 80% 20%, rgba(59, 130, 246, 0.85) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 60% at 70% 80%, rgba(236, 72, 153, 0.9) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 70% at 30% 90%, rgba(6, 182, 212, 0.85) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 60% at 50% 50%, rgba(168, 85, 247, 0.7) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 60%, rgba(249, 115, 22, 0.8) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 10% 20%, rgba(34, 197, 94, 0.7) 0%, transparent 50%),
+    linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+  background-size: 100vw 100vh;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Inner shadow effect for carved/debossed look */
+  text-shadow:
+    /* Dark shadow (bottom-right, inside) */
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    4px 4px 8px rgba(0, 0, 0, 0.3),
+    /* Light highlight (top-left edge) */
+    -1px -1px 2px rgba(255, 255, 255, 0.1);
+  /* Subtle 3D depth */
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.1));
+}
+
+/* Glass morphism effect */
+.glass {
+  background: oklch(1 0 0 / 10%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid oklch(1 0 0 / 20%);
+}
+
+.dark .glass {
+  background: oklch(0 0 0 / 30%);
+  border: 1px solid oklch(1 0 0 / 10%);
+}
+
+/* Scroll indicator animation */
+.scroll-indicator {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+@keyframes bounce-gentle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Fade in animation */
+.fade-in {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.fade-in-delay-1 {
+  animation-delay: 0.2s;
+}
+
+.fade-in-delay-2 {
+  animation-delay: 0.4s;
+}
+
+.fade-in-delay-3 {
+  animation-delay: 0.6s;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section reveal animation (for scroll-triggered reveals) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Parallax utility */
+.parallax-container {
+  perspective: 1px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.parallax-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.parallax-back {
+  transform: translateZ(-1px) scale(2);
+}
+
+.parallax-front {
+  transform: translateZ(0);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Philosophy card hover effect */
+.philosophy-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.philosophy-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 25px -5px oklch(0 0 0 / 10%),
+    0 8px 10px -6px oklch(0 0 0 / 10%);
+}
+
+/* CTA button styles */
+.cta-button {
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+/* View Transitions for page navigation */
+@supports (view-transition-name: none) {
+  ::view-transition-old(page) {
+    animation: slide-out-left 0.3s ease-in-out;
+  }
+
+  ::view-transition-new(page) {
+    animation: slide-in-right 0.3s ease-in-out;
+  }
+
+  /* Reverse animation for back navigation */
+  .back-transition::view-transition-old(page) {
+    animation: slide-out-right 0.3s ease-in-out;
+  }
+
+  .back-transition::view-transition-new(page) {
+    animation: slide-in-left 0.3s ease-in-out;
+  }
+}
+
+@keyframes slide-out-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Page content for view transitions */
+.page-content {
+  view-transition-name: page;
+}
+
+/* Project card styles matching philosophy cards */
+.project-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 25px -5px oklch(0 0 0 / 10%),
+    0 8px 10px -6px oklch(0 0 0 / 10%),
+    0 0 40px -10px rgba(124, 49, 208, 0.3);
+}
