@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Gem, Shapes, Sparkles, Users } from "lucide-react";
+import { Gem, IterationCwIcon, Shapes, Sparkles } from "lucide-react";
 
 interface PhilosophyItem {
   icon: React.ReactNode;
@@ -9,34 +9,27 @@ interface PhilosophyItem {
 
 const philosophyItems: PhilosophyItem[] = [
   {
-    icon: <Sparkles className="w-8 h-8" />,
+    icon: <Shapes className="w-8 h-8" />,
     title: "Simplicity",
     description:
-      "Elegant solutions that cut through complexity. Less is more when every line of code serves a purpose.",
+      "Elegant solutions that cut through complexity. Every system should amplify human capability, not complicate it. Technology exists to serve people.",
   },
   {
-    // If you meant TEAMWORK:
-    icon: <Users className="w-8 h-8" />, // Changed icon to Users
-    title: "Collective Genius",
+    icon: <Gem className="w-8 h-8" />,
+    title: "Collaboration",
     description:
-      "Great software is a team sport. I prioritize clear communication and shared ownership over solo heroics.",
-
-    // OR, if you meant PERFORMANCE (based on your previous description):
-    // icon: <Zap className="w-8 h-8" />,
-    // title: "Uncompromising Speed",
-    // description: "Performance isn't a feature, it's a foundation. Instant interactions build trust; latency breaks it."
+      "I prioritize clear communication and shared ownership over solo heroics. Value is created through dialogue and understanding.",
   },
   {
-    icon: <Shapes className="w-8 h-8" />,
-    title: "Strategic Adaptability",
+    icon: <Sparkles className="w-8 h-8" />,
+    title: "Method & Discovery",
     description:
-      "I focus on finding the right fit to bring value, blending new innovations with established tech.",
+      "I focus on finding the right fit to bring value, blending new innovations with established tech. I'm eager to explore new tools and approaches to improve quality without compromising reliability.",
   },
   {
-    icon: <Gem className="w-8 h-8" />, // Suggesting Heart or User icon
-    title: "Human-First",
-    description:
-      "Technology exists to serve people. Every system should amplify human capability, not complicate it.",
+    icon: <IterationCwIcon />, // Suggesting Heart or User icon
+    title: "Adapt & Improve",
+    description: "Divide et impera. I believe in breaking down complex problems into manageable parts, allowing for iterative development and continuous improvement. This approach enables flexibility and responsiveness to change.",
   },
 ];
 
@@ -96,7 +89,7 @@ export function PhilosophySection(): React.ReactNode {
               }}
             >
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 p-3 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+                <div className="shrink-0 p-3 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
                   {item.icon}
                 </div>
                 <div>
