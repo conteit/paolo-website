@@ -168,8 +168,7 @@ export default function Projects(): React.ReactNode {
                 Coming Soon
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-center max-w-md">
-                I'm working on some exciting projects that will be showcased
-                here. Check back soon!
+                I'm working on some exciting projects. Check back soon!
               </p>
             </div>
 
