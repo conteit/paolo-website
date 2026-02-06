@@ -1,26 +1,8 @@
 <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <style>
-        .favicon-bg {
-        fill: white; /* Default: Light mode background */
-        }
-        .favicon-text {
-        fill: black; /* Default: Light mode text color */
-        }
-
-        @media (prefers-color-scheme: dark) {
-        .favicon-bg {
-        fill: black; /* Dark mode background */
-        }
-        .favicon-text {
-        fill: white; /* Dark mode text color */
-        }
-        }
-    </style>
-
-    <circle cx="100" cy="100" r="100" class="favicon-bg"/>
+    <circle cx="100" cy="100" r="100" fill="#9333ea"/>
 
     <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle"
-          class="favicon-text"
+          fill="white"
           font-family="Arial, Helvetica, sans-serif"
           font-size="95"
           font-weight="bold">
