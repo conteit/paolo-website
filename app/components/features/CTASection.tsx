@@ -52,7 +52,7 @@ export function CTASection(): React.ReactNode {
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     if (sectionRef.current) {
@@ -102,7 +102,7 @@ export function CTASection(): React.ReactNode {
         navigate("/projects");
       }
     },
-    [navigate]
+    [navigate],
   );
 
   const handleToggleContact = useCallback(() => {
@@ -134,7 +134,7 @@ export function CTASection(): React.ReactNode {
       }
       fetcher.submit(formData, { method: "POST", action: "/api/contact" });
     },
-    [email, message, isSubmitting, fetcher, turnstileToken]
+    [email, message, isSubmitting, fetcher, turnstileToken],
   );
 
   return (
@@ -144,7 +144,7 @@ export function CTASection(): React.ReactNode {
     >
       {/* Subtle gradient accent at top */}
       <div
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"
+        className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-purple-500/50 to-transparent"
         aria-hidden="true"
       />
 
@@ -201,7 +201,9 @@ export function CTASection(): React.ReactNode {
         {/* Inline Contact Form */}
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            showContactForm ? "max-h-[500px] opacity-100 mb-6" : "max-h-0 opacity-0"
+            showContactForm
+              ? "max-h-[500px] opacity-100 mb-6"
+              : "max-h-0 opacity-0"
           }`}
         >
           <div
@@ -269,8 +271,9 @@ export function CTASection(): React.ReactNode {
                 )}
 
                 <p className="mt-4 text-xs text-gray-500 dark:text-gray-500 text-center">
-                  By submitting, you consent to the processing of personal data you have inserted,
-                  provided solely for the purpose of getting in contact.
+                  By submitting, you consent to the processing of personal data
+                  you have inserted, provided solely for the purpose of getting
+                  in contact.
                 </p>
 
                 <button
