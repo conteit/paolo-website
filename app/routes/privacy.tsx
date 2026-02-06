@@ -145,7 +145,7 @@ export default function Privacy(): React.ReactNode {
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>
                 <strong>Cookie consent preference</strong> - Stored locally to
-                remember your choice (if cookie banner is enabled)
+                remember your choice
               </li>
             </ul>
             <p className="mt-2">
