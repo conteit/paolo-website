@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState, useCallback } from "react";
-import { useNavigate, useFetcher } from "react-router";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useFetcher, useNavigate } from "react-router";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
-import { ArrowRight, Mail, Send, X, Check, Loader2 } from "lucide-react";
+import { ArrowRight, Check, Loader2, Mail, Send, X } from "lucide-react";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
@@ -77,11 +77,17 @@ export function CTASection(): React.ReactNode {
       setMessage("");
       setTurnstileToken(null);
       turnstileRef.current?.reset();
-      const timer = setTimeout(() => {
-        setShowSuccess(false);
+      // Close form first, then reset success state after animation completes
+      const closeTimer = setTimeout(() => {
         setShowContactForm(false);
+      }, 2500);
+      const resetTimer = setTimeout(() => {
+        setShowSuccess(false);
       }, 3000);
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(closeTimer);
+        clearTimeout(resetTimer);
+      };
     }
   }, [isSuccess]);
 
@@ -262,6 +268,11 @@ export function CTASection(): React.ReactNode {
                   </div>
                 )}
 
+                <p className="mt-4 text-xs text-gray-500 dark:text-gray-500 text-center">
+                  By submitting, you consent to the processing of personal data you have inserted,
+                  provided solely for the purpose of getting in contact.
+                </p>
+
                 <button
                   type="submit"
                   disabled={
@@ -269,7 +280,7 @@ export function CTASection(): React.ReactNode {
                     isSubmitting ||
                     (TURNSTILE_SITE_KEY && !turnstileToken)
                   }
-                  className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 disabled:cursor-not-allowed text-white font-medium transition-colors"
+                  className="mt-3 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 disabled:cursor-not-allowed text-white font-medium transition-colors"
                 >
                   {isSubmitting ? (
                     <>
