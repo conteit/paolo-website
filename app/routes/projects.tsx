@@ -1,6 +1,6 @@
 import type { MetaFunction } from "react-router";
 import { Link, useNavigate } from "react-router";
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ArrowLeft, Rocket } from "lucide-react";
 
 import { useBackground } from "~/hooks/useBackground";
@@ -184,10 +184,8 @@ export default function Projects(): React.ReactNode {
 
         {/* Footer with subtle brand reminder */}
         <footer className="py-8 px-6 border-t border-gray-200 dark:border-gray-800">
-          <div className="max-w-6xl mx-auto text-center">
-            <p className="text-sm text-gray-500 dark:text-gray-500">
-              Built by Paolo Contessi
-            </p>
+          <div className="max-w-6xl mx-auto text-center text-sm text-gray-500 dark:text-gray-500">
+            <p>© {new Date().getFullYear()} Paolo Contessi. All rights reserved.</p>
           </div>
         </footer>
       </main>

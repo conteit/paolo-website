@@ -261,6 +261,15 @@ export default function Privacy(): React.ReactNode {
           </section>
         </div>
       </article>
+
+      {/* Footer */}
+      <footer className="py-8 px-6 border-t border-gray-200 dark:border-gray-800">
+        <div className="max-w-4xl mx-auto text-center text-sm text-gray-500 dark:text-gray-500">
+          <p>
+            © {new Date().getFullYear()} Paolo Contessi. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }
