@@ -2,6 +2,7 @@ import type { MetaFunction } from "react-router";
 
 export const meta: MetaFunction = () => [
   { title: "This is Paolo Contessi" },
+  { name: "robots", content: "noindex, nofollow" },
 ];
 
 export default function Edge(): React.ReactNode {

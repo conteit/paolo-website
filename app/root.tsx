@@ -13,10 +13,20 @@ export function Layout({ children }: LayoutProps): React.ReactNode {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>This is Paolo Contessi</title>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <Meta />
         <Links />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Paolo Contessi",
+              url: "https://paolocontessi.me",
+            }),
+          }}
+        />
       </head>
       <body className="bg-white text-black dark:bg-black dark:text-white">
         {children}

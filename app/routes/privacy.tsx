@@ -9,6 +9,19 @@ export const meta: MetaFunction = () => {
       name: "description",
       content: "Privacy Policy for paolocontessi.me",
     },
+    {
+      tagName: "link",
+      rel: "canonical",
+      href: "https://paolocontessi.me/privacy",
+    },
+    { property: "og:title", content: "Privacy Policy - Paolo Contessi" },
+    {
+      property: "og:description",
+      content: "Privacy Policy for paolocontessi.me",
+    },
+    { property: "og:url", content: "https://paolocontessi.me/privacy" },
+    { property: "og:type", content: "website" },
+    { property: "og:site_name", content: "Paolo Contessi" },
   ];
 };
 
