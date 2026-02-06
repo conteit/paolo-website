@@ -13,6 +13,33 @@ export const meta: MetaFunction = () => {
       name: "description",
       content: "A collection of projects and experiments by Paolo Contessi.",
     },
+    {
+      tagName: "link",
+      rel: "canonical",
+      href: "https://paolocontessi.me/projects",
+    },
+    { property: "og:title", content: "Projects - Paolo Contessi" },
+    {
+      property: "og:description",
+      content: "A collection of projects and experiments by Paolo Contessi.",
+    },
+    { property: "og:url", content: "https://paolocontessi.me/projects" },
+    { property: "og:type", content: "website" },
+    { property: "og:site_name", content: "Paolo Contessi" },
+    {
+      property: "og:image",
+      content: "https://paolocontessi.me/images/avatar.jpeg",
+    },
+    { name: "twitter:card", content: "summary" },
+    { name: "twitter:title", content: "Projects - Paolo Contessi" },
+    {
+      name: "twitter:description",
+      content: "A collection of projects and experiments by Paolo Contessi.",
+    },
+    {
+      name: "twitter:image",
+      content: "https://paolocontessi.me/images/avatar.jpeg",
+    },
   ];
 };
 
@@ -101,7 +128,7 @@ export default function Projects(): React.ReactNode {
         document.documentElement.classList.remove("back-transition");
       }
     },
-    [navigate]
+    [navigate],
   );
 
   return (
@@ -185,7 +212,9 @@ export default function Projects(): React.ReactNode {
         {/* Footer with subtle brand reminder */}
         <footer className="py-8 px-6 border-t border-gray-200 dark:border-gray-800">
           <div className="max-w-6xl mx-auto text-center text-sm text-gray-500 dark:text-gray-500">
-            <p>© {new Date().getFullYear()} Paolo Contessi. All rights reserved.</p>
+            <p>
+              © {new Date().getFullYear()} Paolo Contessi. All rights reserved.
+            </p>
           </div>
         </footer>
       </main>
