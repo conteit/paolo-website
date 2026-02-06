@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useFetcher, useNavigate } from "react-router";
+import { Link, useFetcher, useNavigate } from "react-router";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { ArrowRight, Check, Loader2, Mail, Send, X } from "lucide-react";
 import { SiGithub, SiLinkedin } from "react-icons/si";
@@ -323,13 +323,19 @@ export function CTASection(): React.ReactNode {
         </div>
 
         {/* Footer text */}
-        <p
+        <div
           className={`mt-16 text-sm text-gray-500 dark:text-gray-500 transition-all duration-700 delay-300 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
         >
-          Based in Italy, building for the world.
-        </p>
+          <p>Based in Italy, building for the world.</p>
+          <Link
+            to="/privacy"
+            className="mt-2 inline-block hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+          >
+            Privacy Policy
+          </Link>
+        </div>
       </div>
     </section>
   );
