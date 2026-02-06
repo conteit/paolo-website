@@ -329,6 +329,9 @@ export function CTASection(): React.ReactNode {
           }`}
         >
           <p>Based in Italy, building for the world.</p>
+          <p className="mt-2">
+            © {new Date().getFullYear()} Paolo Contessi. All rights reserved.
+          </p>
           <Link
             to="/privacy"
             className="mt-2 inline-block hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
