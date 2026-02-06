@@ -1,12 +1,6 @@
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "react-router";
-import { Analytics } from "@vercel/analytics/react";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 
+import { AnalyticsProvider } from "~/components/AnalyticsProvider";
 import "./app.css";
 
 interface LayoutProps {
@@ -28,7 +22,7 @@ export function Layout({ children }: LayoutProps): React.ReactNode {
         {children}
         <ScrollRestoration />
         <Scripts />
-        <Analytics />
+        <AnalyticsProvider />
       </body>
     </html>
   );

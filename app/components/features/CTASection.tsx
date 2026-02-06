@@ -1,16 +1,8 @@
-import { useEffect, useRef, useState, useCallback } from "react";
-import { useNavigate, useFetcher } from "react-router";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link, useFetcher, useNavigate } from "react-router";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
-import {
-  ArrowRight,
-  Mail,
-  Github,
-  Linkedin,
-  Send,
-  X,
-  Check,
-  Loader2,
-} from "lucide-react";
+import { ArrowRight, Check, Loader2, Mail, Send, X } from "lucide-react";
+import { SiGithub, SiLinkedin } from "react-icons/si";
 
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
 
@@ -22,12 +14,12 @@ interface SocialLink {
 
 const socialLinks: SocialLink[] = [
   {
-    icon: <Github className="w-5 h-5" />,
+    icon: <SiGithub className="w-5 h-5" />,
     label: "GitHub",
     href: "https://github.com/conteit",
   },
   {
-    icon: <Linkedin className="w-5 h-5" />,
+    icon: <SiLinkedin className="w-5 h-5" />,
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/paolo-contessi-64536657/",
   },
@@ -60,7 +52,7 @@ export function CTASection(): React.ReactNode {
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     if (sectionRef.current) {
@@ -85,11 +77,17 @@ export function CTASection(): React.ReactNode {
       setMessage("");
       setTurnstileToken(null);
       turnstileRef.current?.reset();
-      const timer = setTimeout(() => {
-        setShowSuccess(false);
+      // Close form first, then reset success state after animation completes
+      const closeTimer = setTimeout(() => {
         setShowContactForm(false);
+      }, 2500);
+      const resetTimer = setTimeout(() => {
+        setShowSuccess(false);
       }, 3000);
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(closeTimer);
+        clearTimeout(resetTimer);
+      };
     }
   }, [isSuccess]);
 
@@ -104,7 +102,7 @@ export function CTASection(): React.ReactNode {
         navigate("/projects");
       }
     },
-    [navigate]
+    [navigate],
   );
 
   const handleToggleContact = useCallback(() => {
@@ -136,7 +134,7 @@ export function CTASection(): React.ReactNode {
       }
       fetcher.submit(formData, { method: "POST", action: "/api/contact" });
     },
-    [email, message, isSubmitting, fetcher, turnstileToken]
+    [email, message, isSubmitting, fetcher, turnstileToken],
   );
 
   return (
@@ -146,7 +144,7 @@ export function CTASection(): React.ReactNode {
     >
       {/* Subtle gradient accent at top */}
       <div
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"
+        className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-purple-500/50 to-transparent"
         aria-hidden="true"
       />
 
@@ -203,7 +201,9 @@ export function CTASection(): React.ReactNode {
         {/* Inline Contact Form */}
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            showContactForm ? "max-h-[500px] opacity-100 mb-6" : "max-h-0 opacity-0"
+            showContactForm
+              ? "max-h-[500px] opacity-100 mb-6"
+              : "max-h-0 opacity-0"
           }`}
         >
           <div
@@ -270,6 +270,12 @@ export function CTASection(): React.ReactNode {
                   </div>
                 )}
 
+                <p className="mt-4 text-xs text-gray-500 dark:text-gray-500 text-center">
+                  By submitting, you consent to the processing of personal data
+                  you have inserted, provided solely for the purpose of getting
+                  in contact.
+                </p>
+
                 <button
                   type="submit"
                   disabled={
@@ -277,7 +283,7 @@ export function CTASection(): React.ReactNode {
                     isSubmitting ||
                     (TURNSTILE_SITE_KEY && !turnstileToken)
                   }
-                  className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 disabled:cursor-not-allowed text-white font-medium transition-colors"
+                  className="mt-3 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 disabled:cursor-not-allowed text-white font-medium transition-colors"
                 >
                   {isSubmitting ? (
                     <>
@@ -317,13 +323,19 @@ export function CTASection(): React.ReactNode {
         </div>
 
         {/* Footer text */}
-        <p
+        <div
           className={`mt-16 text-sm text-gray-500 dark:text-gray-500 transition-all duration-700 delay-300 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
         >
-          Based in Italy, building for the world.
-        </p>
+          <p>Based in Italy, building for the world.</p>
+          <Link
+            to="/privacy"
+            className="mt-2 inline-block hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+          >
+            Privacy Policy
+          </Link>
+        </div>
       </div>
     </section>
   );

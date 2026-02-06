@@ -1,7 +1,10 @@
 import type { ActionFunctionArgs } from "react-router";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const isDev = process.env.NODE_ENV === "development";
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 interface TurnstileVerifyResponse {
   success: boolean;
@@ -86,6 +89,19 @@ export async function action({ request }: ActionFunctionArgs) {
       replyToEmail = email.trim();
     }
 
+    const emailBody = replyToEmail
+      ? `You received a new message from your website contact form:\n\nFrom: ${replyToEmail}\n\n${message.trim()}`
+      : `You received a new message from your website contact form:\n\n${message.trim()}`;
+
+    // Dev mode: log instead of sending
+    if (!resend || isDev) {
+      console.log("=== DEV MODE: Contact form submission ===");
+      console.log("From:", replyToEmail || "(no email provided)");
+      console.log("Message:", message.trim());
+      console.log("==========================================");
+      return Response.json({ success: true });
+    }
+
     const recipientEmail = process.env.CONTACT_EMAIL;
     if (!recipientEmail) {
       console.error("CONTACT_EMAIL environment variable not set");
@@ -94,10 +110,6 @@ export async function action({ request }: ActionFunctionArgs) {
         { status: 500 }
       );
     }
-
-    const emailBody = replyToEmail
-      ? `You received a new message from your website contact form:\n\nFrom: ${replyToEmail}\n\n${message.trim()}`
-      : `You received a new message from your website contact form:\n\n${message.trim()}`;
 
     const { error } = await resend.emails.send({
       from: "Contact Form <hello@paolocontessi.me>",
