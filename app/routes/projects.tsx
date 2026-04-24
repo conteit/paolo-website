@@ -48,7 +48,7 @@ const projects: Project[] = [
     id: "gitlab-helper",
     title: "GitLab Helper",
     description:
-      "Self-hosted web dashboard that lets teams safely trigger GitLab pipeline actions without granting elevated permissions. Features real-time job status via Server-Sent Events, per-action access control, immutable audit logging, user management with optional LDAP/AD integration, and GitLab instance monitoring.",
+      "Self-hosted PWA that lets teams safely trigger GitLab pipeline actions without granting elevated permissions. Features real-time job status via Server-Sent Events, per-action access control, immutable audit logging, user management with optional LDAP/AD integration, and GitLab instance monitoring.",
     tags: ["TypeScript", "React", "Fastify", "SQLite", "Docker"],
     githubUrl: "https://github.com/conteit/gitlab-helper",
   },
