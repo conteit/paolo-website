@@ -1,0 +1,40 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "schedule": ["before 9am on Monday"],
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "groupName": "react-router",
+      "matchPackageNames": ["react-router", "@react-router/**"]
+    },
+    {
+      "groupName": "tailwindcss",
+      "matchPackageNames": ["tailwindcss", "@tailwindcss/**"]
+    },
+    {
+      "groupName": "react",
+      "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"]
+    },
+    {
+      "groupName": "vite",
+      "matchPackageNames": ["vite", "vite-tsconfig-paths", "@vitejs/**"]
+    },
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true,
+      "automergeType": "pr",
+      "requiredStatusChecks": ["typecheck", "build"]
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"],
+    "automerge": true
+  },
+  "dependencyDashboard": true
+}
