@@ -2,7 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useFetcher, useNavigate } from "react-router";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { ArrowRight, Check, Loader2, Mail, Send, X } from "lucide-react";
-import { SiGithub, SiLinkedin } from "react-icons/si";
+import { SiGithub } from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa";
 
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
 
@@ -19,7 +20,7 @@ const socialLinks: SocialLink[] = [
     href: "https://github.com/conteit",
   },
   {
-    icon: <SiLinkedin className="w-5 h-5" />,
+    icon: <FaLinkedinIn className="w-5 h-5" />,
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/paolo-contessi-64536657/",
   },
