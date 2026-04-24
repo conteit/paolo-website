@@ -1,4 +1,4 @@
-import { ExternalLink, Github, Folder } from "lucide-react";
+import { ExternalLink, Code, Folder } from "lucide-react";
 
 export interface Project {
   id: string;
@@ -64,7 +64,7 @@ export function ProjectCard({ project }: ProjectCardProps): React.ReactNode {
               rel="noopener noreferrer"
               className="cta-button inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium"
             >
-              <Github className="w-4 h-4" />
+              <Code className="w-4 h-4" />
               Source
             </a>
           )}
