@@ -35,13 +35,13 @@ const philosophyItems: PhilosophyItem[] = [
     icon: <BrainCircuit className="w-8 h-8" />,
     title: "AI, Unleashed",
     description:
-      "I want to put AI's real power to work in systems that matter, with the discipline to do it responsibly. The interesting part isn't adding AI; it's unlocking what it can genuinely do while building the guardrails that let people trust it. Done right, that discipline doesn't hold the power back. It's what sets it loose.",
+      "AI is changing everything, and the people who'll get the most from it are the ones who know where it truly belongs. The interesting part isn't adding AI; it's deciding deliberately where it genuinely fits and building the guardrails that let people trust it. Done right, that judgment doesn't hold the power back — it's what sets it loose.",
   },
   {
     icon: <Network className="w-8 h-8" />,
     title: "Leadership as Multiplication",
     description:
-      "The work I care about now is making a team better than the sum of its parts: understanding why a process exists before changing it, removing the friction that drains good people, and giving others room to grow into harder problems. I measure it by the decisions I no longer need to make.",
+      "The work I care about now is making a team better than the sum of its parts: building the safety that lets people speak up, disagree, and try things without fear, removing the friction that drains them, and giving them room to grow into harder problems. I measure it by the decisions I no longer need to make.",
   },
 ];
 
