@@ -35,7 +35,7 @@ const philosophyItems: PhilosophyItem[] = [
     icon: <BrainCircuit className="w-8 h-8" />,
     title: "AI, Unleashed",
     description:
-      "AI is changing everything, and the people who'll get the most from it are the ones who know where it truly belongs. The interesting part isn't adding AI; it's deciding deliberately where it genuinely fits and building the guardrails that let people trust it. Done right, that judgment doesn't hold the power back. It's what sets it loose.",
+      "AI is changing everything, and the people who'll get the most from it are the ones who know where it truly belongs. The interesting part isn't adding AI; it's deciding deliberately where it genuinely fits and building the guardrails that let people trust it. Done right, that judgment doesn't hold the power back; it's what sets it loose.",
   },
   {
     icon: <Network className="w-8 h-8" />,
