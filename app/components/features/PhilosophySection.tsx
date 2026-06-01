@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Gem, IterationCwIcon, Shapes, Sparkles } from "lucide-react";
+import { BrainCircuit, Gem, IterationCwIcon, Network, Shapes, Sparkles } from "lucide-react";
 
 interface PhilosophyItem {
   icon: React.ReactNode;
@@ -27,9 +27,21 @@ const philosophyItems: PhilosophyItem[] = [
       "I focus on finding the right fit to bring value, blending new innovations with established tech. I'm eager to explore new tools and approaches to improve quality without compromising reliability.",
   },
   {
-    icon: <IterationCwIcon />, // Suggesting Heart or User icon
+    icon: <IterationCwIcon />,
     title: "Adapt & Improve",
     description: "Divide et impera. I believe in breaking down complex problems into manageable parts, allowing for iterative development and continuous improvement. This approach enables flexibility and responsiveness to change.",
+  },
+  {
+    icon: <BrainCircuit className="w-8 h-8" />,
+    title: "AI, Unleashed",
+    description:
+      "I want to put AI's real power to work in systems that matter, with the discipline to do it responsibly. The interesting part isn't adding AI; it's unlocking what it can genuinely do while building the guardrails that let people trust it. Done right, that discipline doesn't hold the power back. It's what sets it loose.",
+  },
+  {
+    icon: <Network className="w-8 h-8" />,
+    title: "Leadership as Multiplication",
+    description:
+      "The work I care about now is making a team better than the sum of its parts: understanding why a process exists before changing it, removing the friction that drains good people, and giving others room to grow into harder problems. I measure it by the decisions I no longer need to make.",
   },
 ];
 
