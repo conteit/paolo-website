@@ -148,3 +148,11 @@ This is Paolo's personal website, currently showing a construction page with ani
 - Conventional commits: `feat:`, `fix:`, `chore:`, etc.
 - Feature branches from main
 - Squash merge to main
+
+## Workflow Preferences
+- Use superpowers skills for all development tasks (planning, debugging, reviewing, etc.)
+- Always check for applicable skills before starting any task
+- For every change: open GitHub issue → create dedicated branch → implement → open pull request
+  - PR triggers Vercel preview deployment for review
+  - Merging PR deploys to production
+  - Never push directly to main
