@@ -50,7 +50,7 @@ const projects: Project[] = [
     description:
       "A sudoku PWA that teaches you to solve instead of solving for you. A deterministic technique engine names the pattern that applies to your actual board and escalates only as far as you ask — region, technique name, exact cells, full walk-through — without ever volunteering the digit. It also verifies your pencil marks, runs drills judged on the board, and ships a Learn section, offline play and English/Italian.",
     tags: ["TypeScript", "React", "Vite", "IndexedDB", "PWA"],
-    liveUrl: "https://sudoku-coach-steel.vercel.app",
+    liveUrl: "https://sudoku-coach.lab.paolocontessi.me",
     githubUrl: "https://github.com/conteit/sudoku-coach",
   },
   {
