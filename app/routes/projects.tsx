@@ -48,8 +48,15 @@ const projects: Project[] = [
     id: "sudoku-coach",
     title: "Sudoku Coach",
     description:
-      "A sudoku PWA that teaches you to solve instead of solving for you. A deterministic technique engine names the pattern that applies to your actual board and escalates only as far as you ask — region, technique name, exact cells, full walk-through — without ever volunteering the digit. It also verifies your pencil marks, runs drills judged on the board, and ships a Learn section, offline play and English/Italian.",
-    tags: ["TypeScript", "React", "Vite", "IndexedDB", "PWA"],
+      "A sudoku PWA that teaches you to solve instead of solving for you. A deterministic technique engine names the pattern that applies to your actual board and escalates only as far as you ask — region, technique name, exact cells, full walk-through — without ever volunteering the digit. Local-first: it plays offline with no account, and an optional Google sign-in syncs games and progress across devices through Drive's hidden per-app folder, which the app can read and nothing else.",
+    tags: [
+      "TypeScript",
+      "React",
+      "PWA",
+      "IndexedDB",
+      "Firebase Auth",
+      "Google Drive API",
+    ],
     liveUrl: "https://sudoku-coach.lab.paolocontessi.me",
     githubUrl: "https://github.com/conteit/sudoku-coach",
   },
